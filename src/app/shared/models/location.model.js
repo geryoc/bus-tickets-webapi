@@ -15,6 +15,7 @@ module.exports = (sequelize) => {
       });
     }
   }
+
   Location.init(
     {
       name: DataTypes.STRING,

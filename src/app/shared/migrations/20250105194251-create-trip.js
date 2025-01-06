@@ -13,10 +13,22 @@ module.exports = {
       originLocationId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Location',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       destinationLocationId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Location',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       date: {
         type: Sequelize.DATE,

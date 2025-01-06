@@ -1,17 +1,16 @@
 const { DefaultPagination } = require("../../shared/const/pagination.const");
-const { sequelize } = require("../../shared/models");
-const Location = require("../../shared/models/location.model")(sequelize);
+const models = require("../../shared/models");
 const { Op } = require("sequelize");
 
 const locationController = {
   getById: (req, res, next) => {
     const locationId = req.params.id;
-    Location.findByPk(locationId)
+    models.Location.findByPk(locationId)
       .then((location) => res.json(location))
       .catch(next);
   },
   getAll: (req, res, next) => {
-    Location.findAll()
+    models.Location.findAll()
       .then((locations) => res.json(locations))
       .catch(next);
   },
@@ -32,34 +31,34 @@ const locationController = {
         : undefined,
     };
 
-    Location.findAndCountAll(queryOptions)
+    models.Location.findAndCountAll(queryOptions)
       .then(({ rows: locations, count: totalItems }) => {
         res.json({
           items: locations,
           pagination: {
+            pageNumber: pageNumber,
+            pageSize: limit,
             totalItems,
             totalPages: Math.ceil(totalItems / limit),
-            currentPage: pageNumber,
-            pageSize: limit,
           },
         });
       })
       .catch(next);
   },
   post: (req, res, next) => {
-    Location.create(req.body)
+    models.Location.create(req.body)
       .then((location) => res.status(201).json(location))
       .catch(next);
   },
   put: (req, res, next) => {
     const locationId = req.params.id;
-    Location.update(req.body, { where: { id: locationId }, returning: true })
+    models.Location.update(req.body, { where: { id: locationId }, returning: true })
       .then(([, [updatedLocation]]) => res.json(updatedLocation))
       .catch(next);
   },
   delete: (req, res, next) => {
     const locationId = req.params.id;
-    Location.destroy({ where: { id: locationId } })
+    models.Location.destroy({ where: { id: locationId } })
       .then(() => res.status(204).end())
       .catch(next);
   },
