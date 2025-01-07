@@ -21,8 +21,8 @@ tripRouter.get(
   tripController.getById
 );
 
-tripRouter.post("/", validateBody(tripValidator.default), tripController.post);
-tripRouter.put("/:id", validateBody(tripValidator.default), tripController.put);
+tripRouter.post("/", validateBody(tripValidator.default), tripValidator.validateLocationDependencies, tripController.post);
+tripRouter.put("/:id", validateBody(tripValidator.default), tripValidator.validateLocationDependencies, tripController.put);
 tripRouter.delete(
   "/:id",
   validateParams(tripValidator.id),
