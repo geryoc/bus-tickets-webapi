@@ -1,4 +1,5 @@
 const { DefaultPagination } = require("../../shared/const/pagination.const");
+const { createPaginationResponse } = require("../../shared/helpers/api-response.helper");
 const models = require("../../shared/models");
 const { Op } = require("sequelize");
 
@@ -35,12 +36,7 @@ const locationController = {
       .then(({ rows: locations, count: totalItems }) => {
         res.json({
           items: locations,
-          pagination: {
-            pageNumber: pageNumber,
-            pageSize: limit,
-            totalItems,
-            totalPages: Math.ceil(totalItems / limit),
-          },
+          pagination: createPaginationResponse(pageNumber, limit, totalItems),
         });
       })
       .catch(next);

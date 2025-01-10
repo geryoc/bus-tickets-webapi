@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const locationController = require('./location.controller.js');
 const locationValidator = require('./location.validator.js');
-const { validateBody, validateParams, validateQuery } = require('../../shared/middleware/validationHandler.js');
+const { validateBody, validateParams, validateQuery } = require('../../shared/middleware/validation-handler.middleware.js');
 
 const locationRouter = Router();
 

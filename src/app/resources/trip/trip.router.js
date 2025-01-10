@@ -5,7 +5,7 @@ const {
   validateBody,
   validateParams,
   validateQuery,
-} = require("../../shared/middleware/validationHandler.js");
+} = require("../../shared/middleware/validation-handler.middleware.js");
 
 const tripRouter = Router();
 

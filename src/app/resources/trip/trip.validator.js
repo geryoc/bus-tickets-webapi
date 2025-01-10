@@ -44,10 +44,7 @@ const tripValidator = {
       });
 
       if (locations.length < 2) {
-        return res.status(400).json({
-          error:
-            "Invalid location ID dependencies. Please provide valid origin and destination Location IDs.",
-        });
+        return res.sendBadRequestError("Invalid location ID dependencies. Please provide valid origin and destination Location IDs.");
       }
 
       next();

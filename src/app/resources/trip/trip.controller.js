@@ -1,5 +1,6 @@
 const { DefaultPagination } = require("../../shared/const/pagination.const");
 const { Op } = require("sequelize");
+const { createPaginationResponse } = require("../../shared/helpers/api-response.helper");
 const models = require("../../shared/models");
 
 const tripController = {
@@ -40,12 +41,7 @@ const tripController = {
       .then(({ rows: trips, count: totalItems }) => {
         res.json({
           items: trips,
-          pagination: {
-            pageNumber: pageNumber,
-            pageSize: limit,
-            totalItems,
-            totalPages: Math.ceil(totalItems / limit),
-          },
+          pagination: createPaginationResponse(pageNumber, limit, totalItems),
         });
       })
       .catch(next);
